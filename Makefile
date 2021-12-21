@@ -4,8 +4,4 @@ publish:
 lint:
 	npx eslint .
 
-install: install-deps
-	npx simple-git-hooks
-
-install-deps:
-	npm ci
+install: npm ci
