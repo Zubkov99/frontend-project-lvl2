@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/Zubkov99/frontend-project-lvl2.git"
   },
-  "bin":{
+  "bin": {
     "gendiff": "./gendiff.js"
   },
   "author": "Dmitriy Zubkov",
@@ -21,6 +21,13 @@
   },
   "homepage": "https://github.com/Zubkov99/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^8.3.0"
+    "commander": "^8.3.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0"
   }
 }
