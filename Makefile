@@ -4,4 +4,5 @@ publish:
 lint:
 	npx eslint .
 
-install: npm install
+install: 
+	npm ci
