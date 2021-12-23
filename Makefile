@@ -8,4 +8,4 @@ test:
 	npx jest
 
 install: 
-	npm ci
+	npm install
