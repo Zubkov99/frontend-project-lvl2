@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import fs from 'fs';
 import { Command } from 'commander';
 import getDifferences from './src/getDifferences.js';
+import parseIntoObj from './src/parseIntoObj.js';
 
 const program = new Command();
 
@@ -11,14 +11,6 @@ program
   .option('-f --format [type]', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    const parseIntoObj = (file) => {
-      const result = fs.readFileSync(file, (err, data) => {
-        if (err) throw err;
-        return data;
-      });
-      return JSON.parse(result);
-    };
-
     const firstObj = parseIntoObj(filepath1);
     const secondObj = parseIntoObj(filepath2);
     console.log(getDifferences(firstObj, secondObj));

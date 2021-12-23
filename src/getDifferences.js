@@ -1,21 +1,24 @@
+/* eslint-disable */
 import _ from 'lodash';
+import convertObjInStr from './convertObjInStr.js';
+
 
 const getDifferences = (obj1, obj2) => {
   const transitionalBox = {};
 
-  const result = _.transform(obj1, (result, value, key) => {
+  const result = _.transform(obj1, (storage, value, key) => {
     _.map(obj2, (innerValue, innerKey) => {
       if (_.isEqual(key, innerKey) && _.isEqual(value, innerValue)) {
         transitionalBox[key] = value;
-        return result[`  ${key}`] = value;
+        return storage[`  ${key}`] = value;
       }
       if (_.isEqual(key, innerKey) && !_.isEqual(value, innerValue)) {
         transitionalBox[key] = value;
-        result[`  - ${key}`] = value;
-        return result[`  + ${innerKey}`] = innerValue;
+        storage[`  - ${key}`] = value;
+        return storage[`  + ${innerKey}`] = innerValue;
       }
     });
-    return result;
+    return storage;
   }, {});
 
   const addUniqueKeys = (obj, sign) => {
@@ -29,17 +32,9 @@ const getDifferences = (obj1, obj2) => {
 
   addUniqueKeys(obj1, '-');
   addUniqueKeys(obj2, '+');
-
-  const convertObjInStr = (obj) => {
-    let str = '{';
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(obj)) {
-      str += `\n${key}: ${value}`;
-    }
-    return `${str}\n}`;
-  };
-
   return convertObjInStr(result);
 };
+
+
 
 export default getDifferences;
