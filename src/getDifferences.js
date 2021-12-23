@@ -1,11 +1,9 @@
-/* eslint-disable */
 import _ from 'lodash';
 import convertObjInStr from './convertObjInStr.js';
 
-
 const getDifferences = (obj1, obj2) => {
   const transitionalBox = {};
-
+/* eslint-disable */
   const result = _.transform(obj1, (storage, value, key) => {
     _.map(obj2, (innerValue, innerKey) => {
       if (_.isEqual(key, innerKey) && _.isEqual(value, innerValue)) {
@@ -34,7 +32,5 @@ const getDifferences = (obj1, obj2) => {
   addUniqueKeys(obj2, '+');
   return convertObjInStr(result);
 };
-
-
 
 export default getDifferences;
