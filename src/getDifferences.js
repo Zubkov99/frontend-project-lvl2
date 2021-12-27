@@ -30,6 +30,7 @@ const getDifferences = (obj1, obj2) => {
 
   addUniqueKeys(obj1, '-');
   addUniqueKeys(obj2, '+');
+
   return convertObjInStr(result);
 };
 

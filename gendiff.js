@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import getDifferences from './src/getDifferences.js';
-import parseIntoObj from './src/parseIntoObj.js';
+import parsing from './src/parsers/parsing.js';
 
 const program = new Command();
 
@@ -11,9 +10,7 @@ program
   .option('-f --format [type]', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    const firstObj = parseIntoObj(filepath1);
-    const secondObj = parseIntoObj(filepath2);
-    console.log(getDifferences(firstObj, secondObj));
+    console.log(parsing(filepath1, filepath2));
   });
 
 program.parse(process.argv);

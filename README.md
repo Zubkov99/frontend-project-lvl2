@@ -9,3 +9,6 @@
 
 How to compare json files
 [![asciicast](https://asciinema.org/a/n0rSzuOLIL9ovSuivERrLG0z1.svg)](https://asciinema.org/a/n0rSzuOLIL9ovSuivERrLG0z1)
+
+How to compare yml files
+[![asciicast](https://asciinema.org/a/cCBGpnZHxYtMybWo4GVY6DQRd.svg)](https://asciinema.org/a/cCBGpnZHxYtMybWo4GVY6DQRd)
