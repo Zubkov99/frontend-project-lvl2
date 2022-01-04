@@ -2,6 +2,7 @@ import path from 'path';
 import parseJson from './parseJson.js';
 import parserYaml from './parserYaml.js';
 import getDifferences from '../getDifferences.js';
+import stylish from '../format/stylish.js';
 
 const parsing = (file1, file2) => {
   const file1extname = path.extname(file1);
@@ -20,7 +21,9 @@ const parsing = (file1, file2) => {
     secondObj = parseJson(file2);
   }
 
-  return getDifferences(firstObj, secondObj);
+  const result = getDifferences(firstObj, secondObj);
+
+  return stylish(result);
 };
 
 export default parsing;

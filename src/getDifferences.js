@@ -1,37 +1,30 @@
 import _ from 'lodash';
-import convertObjInStr from './convertObjInStr.js';
 
-const getDifferences = (obj1, obj2) => {
-  const transitionalBox = {};
-/* eslint-disable */
-  const result = _.transform(obj1, (storage, value, key) => {
-    _.map(obj2, (innerValue, innerKey) => {
-      if (_.isEqual(key, innerKey) && _.isEqual(value, innerValue)) {
-        transitionalBox[key] = value;
-        return storage[`  ${key}`] = value;
-      }
-      if (_.isEqual(key, innerKey) && !_.isEqual(value, innerValue)) {
-        transitionalBox[key] = value;
-        storage[`  - ${key}`] = value;
-        return storage[`  + ${innerKey}`] = innerValue;
-      }
-    });
-    return storage;
-  }, {});
+const getDifferences = (data1, data2) => {
+  const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
 
-  const addUniqueKeys = (obj, sign) => {
-    _.map(obj, (value, key) => {
-      if (!_.has(transitionalBox, key)) {
-        transitionalBox[key] = value;
-        result[`  ${sign} ${key}`] = value;
-      }
-    });
-  };
+  return keys.map((key) => {
+    const firstValue = data1[key];
+    const secondValue = data2[key];
 
-  addUniqueKeys(obj1, '-');
-  addUniqueKeys(obj2, '+');
-
-  return convertObjInStr(result);
+    if (!_.has(data1, key)) {
+      return { name: key, status: 'added', value: secondValue };
+    }
+    if (!_.has(data2, key)) {
+      return { name: key, status: 'deleted', value: firstValue };
+    }
+    if (_.isObject(firstValue) && _.isObject(secondValue)) {
+      return {
+        name: key, status: 'hasChildren', children: getDifferences(firstValue, secondValue),
+      };
+    }
+    if (firstValue !== secondValue) {
+      return {
+        name: key, status: 'changed', oldValue: firstValue, newValue: secondValue,
+      };
+    }
+    return { name: key, status: 'unchanged', value: firstValue };
+  });
 };
 
 export default getDifferences;
