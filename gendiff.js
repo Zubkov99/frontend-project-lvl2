@@ -10,8 +10,8 @@ program
   .option('-f, --format <type>', 'output format', 'stylish')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    // const { format } = program.opts();
-    console.log(parsing(filepath1, filepath2));
+    const { format } = program.opts();
+    console.log(parsing(filepath1, filepath2, format));
   });
 
 program.parse(process.argv);

@@ -15,3 +15,6 @@ Comparison of flat yml files
 
 Comparison of deep files
 [![asciicast](https://asciinema.org/a/8wLZTVkQlHnEzjCGbDGXQm34K.svg)](https://asciinema.org/a/8wLZTVkQlHnEzjCGbDGXQm34K)
+
+Comparing files in plain format
+[![asciicast](https://asciinema.org/a/xgXm17ji2X5siqK05d9q5Q3ec.svg)](https://asciinema.org/a/xgXm17ji2X5siqK05d9q5Q3ec)

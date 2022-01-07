@@ -2,9 +2,9 @@ import path from 'path';
 import parseJson from './parseJson.js';
 import parserYaml from './parserYaml.js';
 import getDifferences from '../getDifferences.js';
-import stylish from '../format/stylish.js';
+import formatRendering from '../formatters/formatRendering.js';
 
-const parsing = (file1, file2) => {
+const parsing = (file1, file2, format) => {
   const file1extname = path.extname(file1);
   const file2extname = path.extname(file2);
 
@@ -23,7 +23,7 @@ const parsing = (file1, file2) => {
 
   const result = getDifferences(firstObj, secondObj);
 
-  return stylish(result);
+  return formatRendering(format, result);
 };
 
 export default parsing;

@@ -17,8 +17,11 @@ const readFile = (file) => {
 
 const pathToResultJson = getFixturePath('resultJson.txt');
 const pathToResultYml = getFixturePath('resultYml.txt');
+const resultPlain = getFixturePath('resultPlain.txt');
 
 test('parsing', () => {
-  expect(parsing(getFixturePath('file1.json'), getFixturePath('file2.json'))).toEqual(readFile(pathToResultJson));
-  expect(parsing(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toEqual(readFile(pathToResultYml));
+  expect(parsing(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish')).toEqual(readFile(pathToResultJson));
+  expect(parsing(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish')).toEqual(readFile(pathToResultYml));
+  expect(parsing(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain')).toEqual(readFile(resultPlain));
+  expect(parsing(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain')).toEqual(readFile(resultPlain));
 });
