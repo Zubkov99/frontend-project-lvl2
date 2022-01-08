@@ -1,7 +1,7 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import parsing from '../src/parsers/parsing.js';
+import gendiff from '../src/gendiff.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,10 +20,10 @@ const pathToResultYml = getFixturePath('resultYml.txt');
 const resultPlain = getFixturePath('resultPlain.txt');
 const resultInJsonFormat = getFixturePath('ymlToJsonFormat.txt');
 
-test('parsing', () => {
-  expect(parsing(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish')).toEqual(readFile(pathToResultJson));
-  expect(parsing(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish')).toEqual(readFile(pathToResultYml));
-  expect(parsing(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain')).toEqual(readFile(resultPlain));
-  expect(parsing(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain')).toEqual(readFile(resultPlain));
-  expect(parsing(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'json')).toEqual(readFile(resultInJsonFormat));
+test('gendiff', () => {
+  expect(gendiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish')).toEqual(readFile(pathToResultJson));
+  expect(gendiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish')).toEqual(readFile(pathToResultYml));
+  expect(gendiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain')).toEqual(readFile(resultPlain));
+  expect(gendiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain')).toEqual(readFile(resultPlain));
+  expect(gendiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'json')).toEqual(readFile(resultInJsonFormat));
 });

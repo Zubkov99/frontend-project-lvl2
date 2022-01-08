@@ -36,9 +36,12 @@ To get help, call this command in the terminal
 ✅ Comparison of flat yml files
 [![asciicast](https://asciinema.org/a/cCBGpnZHxYtMybWo4GVY6DQRd.svg)](https://asciinema.org/a/cCBGpnZHxYtMybWo4GVY6DQRd)
 
+✅ Comparison of deep json and yaml files
+[![asciicast](https://asciinema.org/a/MDVRW81vrFljKvPcEpXVqfw0u.svg)](https://asciinema.org/a/MDVRW81vrFljKvPcEpXVqfw0u)
+
 ✅ This program works with flat and deep files. The examples below show the result of comparing two deep files.
 
-The program outputs the result in three formats: stylish, plain, json.
+### The program outputs the result in three formats: stylish, plain, json.
 
 ✅ The result is in the stylish format
 [![asciicast](https://asciinema.org/a/8wLZTVkQlHnEzjCGbDGXQm34K.svg)](https://asciinema.org/a/8wLZTVkQlHnEzjCGbDGXQm34K)
