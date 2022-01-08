@@ -1,4 +1,23 @@
 #!/usr/bin/env node
-import gendiff from './src/index.js';
 
-gendiff();
+import { Command } from 'commander';
+import parsing from './src/parsers/parsing.js';
+// import gendiff from './src/index.js';
+
+const program = new Command();
+
+program
+  .version('0.0.1', '-v, --vers', 'output the current version')
+  .description('Compares two configuration files and shows a difference.', '-h')
+  .option('-f, --format <type>', 'output format', 'stylish')
+  .arguments('<filepath1> <filepath2>')
+  .action((filepath1, filepath2) => {
+    const { format } = program.opts();
+    console.log(parsing(filepath1, filepath2, format));
+  });
+
+program.parse(process.argv);
+
+// import gendiff from './src/index.js';
+
+// gendiff();
