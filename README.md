@@ -18,3 +18,6 @@ Comparison of deep files
 
 Comparing files in plain format
 [![asciicast](https://asciinema.org/a/xgXm17ji2X5siqK05d9q5Q3ec.svg)](https://asciinema.org/a/xgXm17ji2X5siqK05d9q5Q3ec)
+
+Comparing files in Json format
+[![asciicast](https://asciinema.org/a/bXNTeiMuRw4RuQp49Lk1FjwMn.svg)](https://asciinema.org/a/bXNTeiMuRw4RuQp49Lk1FjwMn)

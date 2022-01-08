@@ -5,6 +5,9 @@ const formatRendering = (format, tree) => {
   if (format === 'plain') {
     return plain(tree);
   }
+  if (format === 'json') {
+    return JSON.stringify(tree);
+  }
 
   return stylish(tree);
 };
