@@ -2,7 +2,7 @@ import path from 'path';
 import parseJson from './parseJson.js';
 import parserYaml from './parserYaml.js';
 
-const convertToObj = (data) => {
+const readFiles = (data) => {
   const fileExtname = path.extname(data);
   switch (fileExtname) {
     case '.json':
@@ -16,4 +16,4 @@ const convertToObj = (data) => {
   }
 };
 
-export default convertToObj;
+export default readFiles;

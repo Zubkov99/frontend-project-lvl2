@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import gendiff from '../index.js';
+import readFiles from '../src/parsers/readFiles.js';
 
 const program = new Command();
 
@@ -11,6 +12,8 @@ program
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
     const { format } = program.opts();
-    console.log(gendiff(filepath1, filepath2, format));
+    const firstObj = readFiles(filepath1);
+    const secondObj = readFiles(filepath2);
+    console.log(gendiff(firstObj, secondObj, format));
   });
 program.parse(process.argv);
