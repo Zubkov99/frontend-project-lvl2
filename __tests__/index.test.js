@@ -2,7 +2,6 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import gendiff from '../src/gendiff.js';
-// import readFiles from '../src/parsers/readFiles.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,9 +31,4 @@ test('gendiff', () => {
   expect(gendiff(file1Yml, file2Yml, 'plain')).toEqual(readFile(resultPlain));
   expect(gendiff(file1Json, file2Json, 'plain')).toEqual(readFile(resultPlain));
   expect(gendiff(file1Yml, file2Yml, 'json')).toEqual(readFile(resultInJsonFormat));
-  // expect(gendiff(file1Json, file2Json, 'stylish')).toEqual(readFile(pathToResultJson));
-  // expect(gendiff(file1Yml, file2Yml, 'stylish')).toEqual(readFile(pathToResultYml));
-  // expect(gendiff(file1Yml, file2Yml, 'plain')).toEqual(readFile(resultPlain));
-  // expect(gendiff(file1Json, file2Json, 'plain')).toEqual(readFile(resultPlain));
-  // expect(gendiff(file1Yml, file2Yml, 'json')).toEqual(readFile(resultInJsonFormat));
 });
