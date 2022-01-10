@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/Zubkov99/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/Zubkov99/frontend-project-lvl2/actions)",
   "type": "module",
-  "main": "gendiff.js",
+  "main": "bin/gendiff.js",
   "scripts": {
     "test": "npx jest --bail"
   },
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/Zubkov99/frontend-project-lvl2.git"
   },
   "bin": {
-    "gendiff": "gendiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "author": "Dmitriy Zubkov",
   "license": "ISC",
