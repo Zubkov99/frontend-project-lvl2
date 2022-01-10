@@ -12,7 +12,7 @@
     "url": "git+https://github.com/Zubkov99/frontend-project-lvl2.git"
   },
   "bin": {
-    "gendiff": "bin/gendiff.js"
+    "gendiff": "gendiff.js"
   },
   "author": "Dmitriy Zubkov",
   "license": "ISC",
