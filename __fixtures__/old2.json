@@ -1,5 +1,8 @@
 {
     "timeout": 20,
     "verbose": true,
-    "host": "hexlet.io"
+    "host": "hexlet.io",
+    "haha": {
+    "test": [0, 1, 2, "work?"]
+    }
   }

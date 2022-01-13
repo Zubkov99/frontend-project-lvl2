@@ -13,7 +13,7 @@ const getDifferences = (data1, data2) => {
     if (!_.has(data2, key)) {
       return { name: key, status: 'deleted', value: firstValue };
     }
-    if (_.isObject(firstValue) && _.isObject(secondValue)) {
+    if (_.isPlainObject(firstValue) && _.isPlainObject(secondValue)) {
       return {
         name: key, status: 'hasChildren', children: getDifferences(firstValue, secondValue),
       };
