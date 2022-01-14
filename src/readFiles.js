@@ -1,16 +1,16 @@
 import path from 'path';
-import parseJson from './parseJson.js';
-import parserYaml from './parserYaml.js';
+import fs from 'fs';
+import yaml from 'js-yaml';
 
 const readFiles = (data) => {
   const fileExtname = path.extname(data);
   switch (fileExtname) {
     case '.json':
-      return parseJson(data);
+      return JSON.parse(fs.readFileSync(data));
     case '.yml':
-      return parserYaml(data);
+      return yaml.load(fs.readFileSync(data, 'utf8'));
     case '.yaml':
-      return parserYaml(data);
+      return yaml.load(fs.readFileSync(data, 'utf8'));
     default:
       throw new Error(`Wrong format  ${fileExtname}`);
   }

@@ -2,18 +2,23 @@ import _ from 'lodash';
 
 const getSpace = (replay) => ' '.repeat(replay);
 
+const upLvlOfDepth = (lvl) => {
+  const counter = 4;
+  return counter * lvl;
+};
+
 const stringify = (value, depth) => {
-  if (!_.isPlainObject(value)) return String(value);
+  if (!_.isObject(value)) return String(value);
 
   const keys = Object.keys(value);
   const result = keys.map((item) => {
     if (_.isObject(value[item])) {
-      return `${getSpace(depth + 8)}${item}: ${stringify(value[item], depth + 4)}`;
+      return `${getSpace(depth + upLvlOfDepth(2))}${item}: ${stringify(value[item], depth + upLvlOfDepth(1))}`;
     }
-    return `${getSpace(depth + 8)}${item}: ${value[item]}`;
+    return `${getSpace(depth + upLvlOfDepth(2))}${item}: ${value[item]}`;
   });
 
-  return ['{', ...result, `${getSpace(depth + 4)}}`].join('\n');
+  return ['{', ...result, `${getSpace(depth + upLvlOfDepth(1))}}`].join('\n');
 };
 
 const iteration = (tree, depth) => {
@@ -24,15 +29,15 @@ const iteration = (tree, depth) => {
 
     switch (status) {
       case 'added':
-        return `${getSpace(depth + 2)}+ ${name}: ${stringify(value, depth)}`;
+        return `${getSpace(depth + upLvlOfDepth(1) - 2)}+ ${name}: ${stringify(value, depth)}`;
       case 'deleted':
-        return `${getSpace(depth + 2)}- ${name}: ${stringify(value, depth)}`;
+        return `${getSpace(depth + upLvlOfDepth(1) - 2)}- ${name}: ${stringify(value, depth)}`;
       case 'unchanged':
-        return `${getSpace(depth + 2)}  ${name}: ${stringify(value, depth)}`;
+        return `${getSpace(depth + upLvlOfDepth(1) - 2)}  ${name}: ${stringify(value, depth)}`;
       case 'changed':
-        return `${getSpace(depth + 2)}- ${name}: ${stringify(oldValue, depth)}\n${getSpace(depth + 2)}+ ${name}: ${stringify(newValue, depth)}`;
+        return `${getSpace(depth + upLvlOfDepth(1) - 2)}- ${name}: ${stringify(oldValue, depth)}\n${getSpace(depth + upLvlOfDepth(1) - 2)}+ ${name}: ${stringify(newValue, depth)}`;
       case 'hasChildren':
-        return `${getSpace(depth + 2)}  ${name}: ${iteration(children, depth + 4)}`;
+        return `${getSpace(depth + upLvlOfDepth(1) - 2)}  ${name}: ${iteration(children, depth + upLvlOfDepth(1))}`;
       default:
         throw new Error(`Status error ${status}.`);
     }
@@ -40,7 +45,6 @@ const iteration = (tree, depth) => {
 
   return ['{', ...result, `${getSpace(depth)}}`].join('\n');
 };
-
 const stylish = (data) => iteration(data, 0);
 
 export default stylish;

@@ -1,6 +1,6 @@
 import getDifferences from './getDifferences.js';
 import formatRendering from './formatters/formatRendering.js';
-import readFiles from './parsers/readFiles.js';
+import readFiles from './readFiles.js';
 
 const gendiff = (file1, file2, format) => {
   const firstObj = readFiles(file1);
