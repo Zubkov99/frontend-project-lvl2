@@ -13,7 +13,8 @@ const mapper = {
   },
 };
 
-const formatRendering = (format, tree) => {
+// eslint-disable-next-line default-param-last
+const formatRendering = (format = 'stylish', tree) => {
   switch (format) {
     case 'plain':
       return mapper.plain(tree);
