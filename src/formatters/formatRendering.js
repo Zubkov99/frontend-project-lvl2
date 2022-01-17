@@ -1,15 +1,25 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const formatRendering = (format, tree) => {
-  if (format === 'plain') {
-    return plain(tree);
-  }
-  if (format === 'json') {
-    return JSON.stringify(tree);
-  }
+const mapper = {
+  plain,
+  stylish,
+  json(data) {
+    return JSON.stringify(data);
+  },
+};
 
-  return stylish(tree);
+const formatRendering = (format, tree) => {
+  switch (format) {
+    case 'plain':
+      return mapper.plain(tree);
+    case 'json':
+      return mapper.json(tree);
+    case 'stylish':
+      return mapper.stylish(tree);
+    default:
+      throw new Error(`Format error ${format}`);
+  }
 };
 
 export default formatRendering;
