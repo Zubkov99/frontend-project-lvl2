@@ -2,8 +2,12 @@ import stylish from './stylish.js';
 import plain from './plain.js';
 
 const mapper = {
-  plain,
-  stylish,
+  plain(data) {
+    return plain(data);
+  },
+  stylish(data) {
+    return stylish(data);
+  },
   json(data) {
     return JSON.stringify(data);
   },
