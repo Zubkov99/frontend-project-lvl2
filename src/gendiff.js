@@ -14,7 +14,7 @@ const gendiff = (file1, file2, format) => {
   const firstObj = readAndParse(file1);
   const secondObj = readAndParse(file2);
   const processingResult = getDifferences(firstObj, secondObj);
-  return formatRendering(format, processingResult);
+  return formatRendering(processingResult, format);
 };
 
 export default gendiff;
