@@ -1,46 +1,42 @@
 import _ from 'lodash';
 
-const getSpace = (depth, replay = 4) => ' '.repeat(replay * depth);
+const repeatingSign = '    ';
 
-const stringify = (value, depth) => {
-  if (!_.isPlainObject(value)) return String(value);
+const getSpace = (depth) => (repeatingSign.repeat(depth));
+const stringify = (value, depth = 0) => {
+  if (!_.isObject(value)) {
+    return String(value);
+  }
+  const result = _.keys(value).map((item) => `${getSpace(depth)}    ${item}: ${stringify(value[item], depth + 1)}`);
 
-  const keys = Object.keys(value);
-  const result = keys.map((item) => {
-    if (_.isObject(value[item])) {
-      return `${getSpace(depth, 4)}${item}: ${iteration(value[item], depth)}`;
-    }
-    return `${getSpace(depth, 4)}${item}: ${value[item]}`;
-  });
-
-  return ['{', ...result, `${getSpace(depth, 4)}}`].join('\n');
+  return `{\n${result.join('\n')}\n${getSpace(depth)}}`;
 };
 
-const iteration = (tree, depth) => {
+const getUpdateLine = (sign, value, name, depth) => `${getSpace(depth)}  ${sign} ${name}: ${stringify(value, depth + 1)}`;
+const getNewLine = (name, oldValue, newValue, depth) => `${getSpace(depth)}  - ${name}: ${stringify(oldValue, depth + 1)}\n ${getSpace(depth)} + ${name}: ${stringify(newValue, depth + 1)}`;
+
+const iteration = (tree, depth = 0) => {
   const result = tree.map((item) => {
     const {
       name, status, value, oldValue, newValue, children,
     } = item;
-
     switch (status) {
-      case 'added':
-        return `${getSpace(depth, 4)}+ ${name}: ${stringify(value, depth)}`;
-      case 'deleted':
-        return `${getSpace(depth, 2)}- ${name}: ${stringify(value, depth)}`;
       case 'unchanged':
-        return `${getSpace(depth, 2)}  ${name}: ${stringify(value, depth)}`;
+        return getUpdateLine(' ', value, name, depth);
       case 'changed':
-        return `${getSpace(depth, 2)}- ${name}: ${stringify(oldValue, depth)}\n${getSpace(depth, 2)}+ ${name}: ${stringify(newValue, depth)}`;
+        return getNewLine(name, oldValue, newValue, depth);
+      case 'added':
+        return getUpdateLine('+', value, name, depth);
+      case 'deleted':
+        return getUpdateLine('-', value, name, depth);
       case 'hasChildren':
-        return `${getSpace(depth, 2)}  ${name}: ${iteration(children, depth + 1)}`;
+        return `${getSpace(depth)}    ${name}: ${iteration(children, depth + 1)}`;
       default:
         throw new Error(`Status error ${status}.`);
     }
   });
-
-  return ['{', ...result, `${getSpace(depth, 4)}}`].join('\n');
+  return `{\n${result.join('\n')}\n${getSpace(depth)}}`;
 };
-
-const stylish = (data) => iteration(data, 1);
+const stylish = (data) => iteration(data, 0);
 
 export default stylish;
